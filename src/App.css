@@ -1,0 +1,7 @@
+.App {
+  text-align: center;
+}
+
+.mapboxgl-ctrl-geocoder:first-child {
+  z-index: 1001;
+}
