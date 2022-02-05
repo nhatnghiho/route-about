@@ -150,7 +150,7 @@ function SideNav(props) {
         placeholder='Choose destination'
         onResult={setDestination}
       ></Geocoder>
-      <Container className='form'>
+      <Container id='form'>
         <FormControl variant='filled' id='distance-form'>
           <InputLabel id='distance'>Distance</InputLabel>
           <Select

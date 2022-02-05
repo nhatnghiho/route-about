@@ -79,8 +79,8 @@
   outline: thin dotted\8;
 }
 
-.form {
-  padding: 0px;
+#form {
+  padding: 0;
 }
 
 #distance-form {
