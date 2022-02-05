@@ -3,6 +3,7 @@ import Map from './Map';
 import SideNav from './SideNav';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import './App.css';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
