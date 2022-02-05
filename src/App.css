@@ -41,12 +41,12 @@
 
 .sidenav {
   position: absolute;
-  max-width: 350px;
-  min-width: 350px;
+  max-width: 25%;
+  min-width: 25%;
   height: 100%;
   top: 0;
   left: 0;
-  overflow: hidden;
+  overflow: scroll;
   background-color: antiquewhite;
 }
 
@@ -91,4 +91,11 @@
 #submit {
   margin-left: 20px;
   align-self: center;
+}
+
+#instructions {
+  overflow: scroll;
+  position: absolute;
+  height: 70%;
+  margin-right: 20px;
 }

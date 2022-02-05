@@ -14,7 +14,7 @@ import NavigationIcon from '@mui/icons-material/Navigation';
 import DirectionsWalkIcon from '@mui/icons-material/DirectionsWalk';
 import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
 import Geocoder from './Geocoder';
-import { useSlider } from '@mui/base';
+import Instructions from './Instructions';
 
 var turf = require('@turf/turf');
 
@@ -45,7 +45,6 @@ function SideNav(props) {
 
     let dist = 0;
     let point = turf.point(destination);
-    console.log('point = ' + JSON.stringify(point));
     let waypoints = '';
     let res;
     let count = 0;
@@ -62,8 +61,9 @@ function SideNav(props) {
 
       const query = await fetch(url, { method: 'GET' });
       res = await query.json();
-      dist = res.routes[0].distance;
       console.log(res);
+
+      dist = res.routes[0].distance;
 
       console.log('radius = ' + (distance - dist / 1000) / 5);
 
@@ -83,11 +83,7 @@ function SideNav(props) {
     console.log('count = ' + count);
 
     setTripDirections(
-      <ul>
-        {res.routes[0].legs.map((leg) =>
-          leg.steps.map((step) => <li>{step.maneuver.instruction}</li>)
-        )}
-      </ul>
+      <Instructions id='instructions' data={res.routes[0]}></Instructions>
     );
 
     console.log('distance = ' + res.routes[0].distance);
@@ -122,12 +118,6 @@ function SideNav(props) {
       },
     });
   }
-
-  // const handleSetOrigin = (result) => {
-  //   // console.log('result: ' + result);
-  //   setOrigin(result);
-  //   console.log(origin);
-  // };
 
   return (
     <Card className='sidenav'>
@@ -185,7 +175,7 @@ function SideNav(props) {
       >
         Navigate
       </Button>
-      <div>{tripDirections}</div>
+      {tripDirections}
     </Card>
   );
 }
