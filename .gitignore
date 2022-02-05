@@ -4,6 +4,11 @@
 /node_modules
 /.pnp
 .pnp.js
+/src/AppReact.js
+/src/sample.html
+/src/sample.json
+/src/SideNavTest.js
+
 
 # testing
 /coverage
