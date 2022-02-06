@@ -1,6 +1,6 @@
 # Route-About
 
-A navigation web app to help users plan walking/cycling routes based on distance. It offers 1) both point-to-point and round-trip navigation, 2) numerous randomized routes based on desired origin, destination, and distance, 3) route visualization on map, and 4) detailed instructions.
+A navigation web app to help users plan walking/cycling routes based on distance. It offers 1) both point-to-point and round-trip navigation, 2) numerous randomized routes based on desired start & end, distance, and means of transportation, 3) route visualization on map, and 4) detailed instructions.
 
 ## Inspiration
 
