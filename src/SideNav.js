@@ -47,20 +47,33 @@ function SideNav(props) {
     console.log(destination);
 
     let dist = 0;
-    let point = turf.point(destination);
-    let waypoints = '';
+    let point = turf.point(origin);
+    let waypoints = [];
     let res;
     let count = 0;
 
+    let minLng = origin[0];
+    let minLat = origin[1];
+    let maxLng = origin[0];
+    let maxLat = origin[1];
+
     while (dist < distance * 1000 * 0.9) {
       console.log('test = ' + point.geometry.coordinates[0]);
-      waypoints =
-        `;${point.geometry.coordinates[0]},${point.geometry.coordinates[1]}` +
-        waypoints;
-      const url =
-        `https://api.mapbox.com/directions/v5/mapbox/${profile}/${origin[0]},${origin[1]}` +
-        waypoints +
-        `?geometries=geojson&steps=true&access_token=${props.mapboxgl.accessToken}`;
+      minLng = Math.min(minLng, point.geometry.coordinates[0]);
+      minLat = Math.min(minLat, point.geometry.coordinates[1]);
+      maxLng = Math.max(maxLng, point.geometry.coordinates[0]);
+      maxLat = Math.max(maxLat, point.geometry.coordinates[1]);
+
+      waypoints.push(
+        `${point.geometry.coordinates[0]},${point.geometry.coordinates[1]}`
+      );
+      const url = `https://api.mapbox.com/directions/v5/mapbox/${profile}/${waypoints.join(
+        ';'
+      )};${destination[0]},${
+        destination[1]
+      }?geometries=geojson&steps=true&access_token=${
+        props.mapboxgl.accessToken
+      }`;
 
       const query = await fetch(url, { method: 'GET' });
       res = await query.json();
@@ -73,8 +86,8 @@ function SideNav(props) {
       if (dist < distance * 1000) {
         const polygon = turf.buffer(
           point,
-          distance / 10
-          // Math.max((distance - dist / 1000) / 5, 0.25)
+          // distance / 10
+          Math.max((distance - dist / 1000) / 5, 0.25)
         );
         count += 1;
         point = turf.randomPoint(1, { bbox: turf.bbox(polygon) })[
@@ -103,7 +116,15 @@ function SideNav(props) {
       ></Chip>
     );
 
-    console.log('distance = ' + res.routes[0].distance);
+    console.log('coordinates: ' + res.routes[0].geometry);
+
+    map.current.fitBounds(turf.bbox(res.routes[0].geometry), {
+      padding: { top: 200, bottom: 200, left: 200, right: 200 },
+      maxZoom: 20,
+    });
+
+    // console.log('distance = ' + res.routes[0].distance);
+
     addRoutes(res.routes[0].geometry);
   }
 
