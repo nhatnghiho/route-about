@@ -2,6 +2,7 @@ import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-direct
 import './Directions.css';
 import React, { useRef, useEffect, useState } from 'react';
 
+// NOT USED
 function Directions(props) {
   const map = props.map;
   const directions = props.directions;

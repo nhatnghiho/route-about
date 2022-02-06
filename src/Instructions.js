@@ -5,7 +5,6 @@ import {
   ListItemIcon,
   Paper,
   Icon,
-  Divider,
 } from '@mui/material';
 
 function Instructions(props) {

@@ -16,7 +16,6 @@ import DirectionsWalkIcon from '@mui/icons-material/DirectionsWalk';
 import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
 import Geocoder from './Geocoder';
 import Instructions from './Instructions';
-import { ResetTvOutlined } from '@mui/icons-material';
 
 var turf = require('@turf/turf');
 
@@ -43,27 +42,16 @@ function SideNav(props) {
   };
 
   async function handleClick() {
-    console.log(origin);
-    console.log(destination);
+    // console.log(origin);
+    // console.log(destination);
 
     let dist = 0;
     let point = turf.point(origin);
     let waypoints = [];
     let res;
-    let count = 0;
-
-    let minLng = origin[0];
-    let minLat = origin[1];
-    let maxLng = origin[0];
-    let maxLat = origin[1];
+    // let count = 0;
 
     while (dist < distance * 1000 * 0.9) {
-      console.log('test = ' + point.geometry.coordinates[0]);
-      minLng = Math.min(minLng, point.geometry.coordinates[0]);
-      minLat = Math.min(minLat, point.geometry.coordinates[1]);
-      maxLng = Math.max(maxLng, point.geometry.coordinates[0]);
-      maxLat = Math.max(maxLat, point.geometry.coordinates[1]);
-
       waypoints.push(
         `${point.geometry.coordinates[0]},${point.geometry.coordinates[1]}`
       );
@@ -77,11 +65,11 @@ function SideNav(props) {
 
       const query = await fetch(url, { method: 'GET' });
       res = await query.json();
-      console.log(res);
+      // console.log(res);
 
       dist = res.routes[0].distance;
 
-      console.log('radius = ' + (distance - dist / 1000) / 5);
+      // console.log('radius = ' + (distance - dist / 1000) / 5);
 
       if (dist < distance * 1000) {
         const polygon = turf.buffer(
@@ -89,22 +77,16 @@ function SideNav(props) {
           // distance / 10
           Math.max((distance - dist / 1000) / 5, 0.25)
         );
-        count += 1;
+        // count += 1;
         point = turf.randomPoint(1, { bbox: turf.bbox(polygon) })[
           'features'
         ][0];
       }
     }
 
-    console.log('count = ' + count);
+    // console.log('count = ' + count);
 
-    setTripDirections(
-      <Instructions
-        id='instructions'
-        data={res.routes[0]}
-        handleDistance={props.handleDistance}
-      ></Instructions>
-    );
+    props.addRoutes(res.routes[0].geometry);
 
     setFinalDistance(
       <Chip
@@ -116,45 +98,13 @@ function SideNav(props) {
       ></Chip>
     );
 
-    console.log('coordinates: ' + res.routes[0].geometry);
-
-    map.current.fitBounds(turf.bbox(res.routes[0].geometry), {
-      padding: { top: 200, bottom: 200, left: 200, right: 200 },
-      maxZoom: 20,
-    });
-
-    // console.log('distance = ' + res.routes[0].distance);
-
-    addRoutes(res.routes[0].geometry);
-  }
-
-  function addRoutes(coords) {
-    if (map.current.getSource('route')) {
-      map.current.removeLayer('route');
-      map.current.removeSource('route');
-    }
-
-    map.current.addLayer({
-      id: 'route',
-      type: 'line',
-      source: {
-        type: 'geojson',
-        data: {
-          type: 'Feature',
-          properties: {},
-          geometry: coords,
-        },
-      },
-      layout: {
-        'line-join': 'round',
-        'line-cap': 'round',
-      },
-      paint: {
-        'line-color': '#03AA46',
-        'line-width': 8,
-        'line-opacity': 0.8,
-      },
-    });
+    setTripDirections(
+      <Instructions
+        id='instructions'
+        data={res.routes[0]}
+        handleDistance={props.handleDistance}
+      ></Instructions>
+    );
   }
 
   return (
@@ -166,7 +116,6 @@ function SideNav(props) {
         elementId='origin'
         color='blue'
         placeholder='Choose a starting place'
-        // onResult={handleSetOrigin}
         onResult={setOrigin}
       ></Geocoder>
       <Geocoder
