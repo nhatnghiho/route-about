@@ -4,7 +4,7 @@ A navigation web app to help users plan walking/cycling routes based on distance
 
 ## Inspiration
 
-During COVID, I tried to stay active by walking around campus everyday. The normal routes that I took soon became repetitive and unexciting and I wished there was an app that could help me find new routes. This would help me be more excited for my walks and explore my surroundings. Plus, I would be able to walk anytime and anywhere I want to.
+During COVID, I tried to stay active by walking around campus everyday. As time goes by, however, the normal routes that I took became repetitive and unexciting. Therefore, I wished there was an app that could help me find new routes. This would help me be more excited for my walks and explore my surroundings. Plus, I would be able to walk anytime and anywhere I want to.
 
 ## User Stories
 
