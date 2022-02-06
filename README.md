@@ -15,6 +15,7 @@ During COVID, I tried to stay active by walking around campus everyday. As time 
 ## Background Technologies
 
 - React.js
+- Turf.js
 - Mapbox GL JS
 - Mapbox Directions API
 
