@@ -12,6 +12,16 @@ function App() {
   const mapContainerRef = useRef(null);
   const map = useRef(null);
 
+  const handleDistance = (distance) => {
+    distance = distance / 1000;
+
+    if (distance > 0.2) {
+      return distance.toFixed(1) + ' miles';
+    } else {
+      return (distance * 5280).toFixed(0) + ' feet';
+    }
+  };
+
   return (
     <div>
       <Map
@@ -22,7 +32,7 @@ function App() {
         lat={33.7489924}
         zoom={10}
       />
-      <SideNav map={map} mapboxgl={mapboxgl} />
+      <SideNav map={map} mapboxgl={mapboxgl} handleDistance={handleDistance} />
     </div>
   );
 }

@@ -5,19 +5,10 @@ import {
   ListItemIcon,
   Paper,
   Icon,
+  Divider,
 } from '@mui/material';
 
 function Instructions(props) {
-  const handleDistance = (distance) => {
-    distance = distance / 1000;
-
-    if (distance > 0.2) {
-      return distance.toFixed(1) + ' miles';
-    } else {
-      return (distance * 5280).toFixed(0) + ' feet';
-    }
-  };
-
   const displayInstructions = (data) => {
     const last = data.legs.at(-1).steps.at(-1);
 
@@ -29,7 +20,7 @@ function Instructions(props) {
               <ListItemIcon>{displayIcon(step.maneuver)}</ListItemIcon>
               <ListItemText
                 primary={step.maneuver.instruction}
-                secondary={handleDistance(step.distance)}
+                secondary={props.handleDistance(step.distance)}
               />
             </ListItem>
           ));
@@ -38,7 +29,7 @@ function Instructions(props) {
           <ListItemIcon>{displayIcon(last.maneuver)}</ListItemIcon>
           <ListItemText
             primary={last.maneuver.instruction}
-            secondary={handleDistance(last.distance)}
+            secondary={props.handleDistance(last.distance)}
           />
         </ListItem>
       </List>

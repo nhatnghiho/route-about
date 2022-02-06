@@ -26,6 +26,10 @@ function Geocoder(props) {
   useEffect(() => {
     geocoder.current.on('result', (e) => {
       props.onResult(e.result.center);
+      if (map.current.getSource('route')) {
+        map.current.removeLayer('route');
+        map.current.removeSource('route');
+      }
     });
   });
 

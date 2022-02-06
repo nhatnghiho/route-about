@@ -9,12 +9,14 @@ import {
   Container,
   ToggleButtonGroup,
   ToggleButton,
+  Chip,
 } from '@mui/material';
 import NavigationIcon from '@mui/icons-material/Navigation';
 import DirectionsWalkIcon from '@mui/icons-material/DirectionsWalk';
 import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
 import Geocoder from './Geocoder';
 import Instructions from './Instructions';
+import { ResetTvOutlined } from '@mui/icons-material';
 
 var turf = require('@turf/turf');
 
@@ -30,6 +32,7 @@ function SideNav(props) {
   const [profile, setProfile] = useState('walking');
 
   const [tripDirections, setTripDirections] = useState('');
+  const [finalDistance, setFinalDistance] = useState();
 
   const handleDistanceChange = (e) => {
     setDistance(e.target.value);
@@ -83,7 +86,21 @@ function SideNav(props) {
     console.log('count = ' + count);
 
     setTripDirections(
-      <Instructions id='instructions' data={res.routes[0]}></Instructions>
+      <Instructions
+        id='instructions'
+        data={res.routes[0]}
+        handleDistance={props.handleDistance}
+      ></Instructions>
+    );
+
+    setFinalDistance(
+      <Chip
+        id='chip'
+        label={
+          'Total route distance: ' +
+          props.handleDistance(res.routes[0].distance)
+        }
+      ></Chip>
     );
 
     console.log('distance = ' + res.routes[0].distance);
@@ -175,7 +192,8 @@ function SideNav(props) {
       >
         Navigate
       </Button>
-      {tripDirections}
+      <div>{finalDistance}</div>
+      <div>{tripDirections}</div>
     </Card>
   );
 }

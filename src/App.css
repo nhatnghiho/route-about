@@ -41,8 +41,8 @@
 
 .sidenav {
   position: absolute;
-  max-width: 25%;
-  min-width: 25%;
+  width: 25%;
+  min-width: 350px;
   height: 100%;
   top: 0;
   left: 0;
@@ -96,6 +96,11 @@
 #instructions {
   overflow: scroll;
   position: absolute;
-  height: 70%;
+  height: 55vh;
   margin-right: 20px;
+}
+
+#chip {
+  width: 100%;
+  font-size: medium;
 }
