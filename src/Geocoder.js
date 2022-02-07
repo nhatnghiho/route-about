@@ -8,7 +8,7 @@ function Geocoder(props) {
 
   useEffect(() => {
     geocoder.current = new MapboxGeocoder({
-      accessToken: process.env.REACT_APP_MAPBOX_TOKEN,
+      accessToken: mapboxgl.accessToken,
       mapboxgl: mapboxgl,
       marker: {
         color: props.color,

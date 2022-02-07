@@ -8,7 +8,8 @@ import './App.css';
 
 var turf = require('@turf/turf');
 
-mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
+mapboxgl.accessToken =
+  'pk.eyJ1IjoibmhhdG5naGlobyIsImEiOiJja3lxOGY4MmswaGg2MnBudXh1YTU2N3gwIn0.yBNuI6sTbLBiVYgeetvoGA';
 
 function App() {
   const mapContainerRef = useRef(null);
