@@ -2,6 +2,8 @@
 
 A navigation web app to help users plan walking/cycling routes based on distance. It offers 1) both point-to-point and round-trip navigation, 2) numerous randomized routes based on desired start & end, distance, and means of transportation, 3) route visualization on map, and 4) detailed instructions.
 
+Try it out: https://nhatnghiho.github.io/route-about/
+
 ## Inspiration
 
 During COVID, I tried to stay active by walking around campus everyday. As time goes by, however, the normal routes that I took became repetitive and unexciting. Therefore, I wished there was an app that could help me find new routes. This would help me be more excited for my walks and explore my surroundings. Plus, I would be able to walk anytime and anywhere I want to.
