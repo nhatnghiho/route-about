@@ -2,6 +2,8 @@ import React, { useRef } from 'react';
 import Map from './Map';
 import SideNav from './SideNav';
 import mapboxgl from 'mapbox-gl';
+// eslint-disable-next-line import/no-webpack-loader-syntax
+import MapboxWorker from 'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import './App.css';
@@ -10,6 +12,7 @@ var turf = require('@turf/turf');
 
 mapboxgl.accessToken =
   'pk.eyJ1IjoibmhhdG5naGlobyIsImEiOiJja3lxOGY4MmswaGg2MnBudXh1YTU2N3gwIn0.yBNuI6sTbLBiVYgeetvoGA';
+mapboxgl.workerClass = MapboxWorker;
 
 function App() {
   const mapContainerRef = useRef(null);
